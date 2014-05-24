@@ -1,0 +1,5 @@
+[Tuleap]
+name=Tuleap
+baseurl=http://ci.tuleap.net/yum/tuleap/rhel/6/dev/$basearch
+enabled=1
+gpgcheck=0
