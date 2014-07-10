@@ -67,6 +67,7 @@ mv /etc/group                 /data/etc
 mv /root/.tuleap_passwd       /data/root
 
 # Data
+mv /home/codendiadm /data/home
 mv /home/groups    /data/home
 mv /home/users     /data/home
 mv /var/lib/tuleap /data/lib

@@ -17,6 +17,7 @@ set -e
 [ -d /etc/httpd/conf ]            && rm -rf /etc/httpd/conf
 [ -d /etc/httpd/conf.d ]          && rm -rf /etc/httpd/conf.d
 
+[ -d /home/codendiadm ]  && rm -rf /home/codendiadm
 [ -d /home/groups ]      && rm -rf /home/groups
 [ -d /home/users ]       && rm -rf /home/users
 [ -d /var/lib/mysql ]    && rm -rf /var/lib/mysql
@@ -45,6 +46,7 @@ ln -s /data/etc/httpd/conf conf
 ln -s /data/etc/httpd/conf.d conf.d
 
 cd /home
+ln -s /data/home/codendiadm codendiadm
 ln -s /data/home/users users
 ln -s /data/home/groups groups
 
