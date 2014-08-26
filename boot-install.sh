@@ -3,7 +3,7 @@
 set -e
 
 function generate_passwd {
-   cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 15 | head -1 
+   cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 15 | head -1
 }
 
 mkdir -p /data/etc/httpd/
@@ -68,7 +68,7 @@ mv /root/.tuleap_passwd       /data/root
 
 # Data
 mv /home/groups    /data/home
-mv /home/users     /data/users
+mv /home/users     /data/home
 mv /var/lib/tuleap /data/lib
 
 # Will be restored by boot-fixpath.sh later
