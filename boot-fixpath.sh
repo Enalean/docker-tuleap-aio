@@ -47,6 +47,7 @@ ln -s /data/etc/httpd/conf.d conf.d
 cd /home
 ln -s /data/home/users users
 ln -s /data/home/groups groups
+ln -s /data/home/codendiadm codendiadm
 
 cd /var/lib
 ln -s /data/lib/mysql mysql
