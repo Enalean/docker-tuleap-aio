@@ -229,7 +229,7 @@ control_service() {
 enable_service() {
     local service="$1"
     if [ "$INSTALL_PROFILE" = "rhel" ]; then
-	$CHKCONFIG $service on
+	: # $CHKCONFIG $service on
     else
 	: # On Debian, services are enabled by default
     fi
