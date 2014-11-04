@@ -3,8 +3,8 @@ FROM centos:centos6
 
 MAINTAINER Manuel Vacelet, manuel.vacelet@enalean.com
 
-RUN rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
-RUN rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm http://mir01.syntis.net/epel/6/i386/epel-release-6-8.noarch.rpm
+RUN rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt &&
+    rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm http://mir01.syntis.net/epel/6/i386/epel-release-6-8.noarch.rpm
 
 COPY rpmforge.repo Tuleap.repo /etc/yum.repos.d/
 
