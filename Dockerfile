@@ -14,16 +14,7 @@ RUN yum install -y mysql-server \
     python-pip \
     sudo \
     rsyslog \
-    tuleap-install \
-    cronie \
-    tuleap-core-subversion \
-    tuleap-plugin-agiledashboard \
-    tuleap-plugin-hudson \
-    tuleap-theme-flamingparrot \
-    tuleap-plugin-graphontrackers \
-    tuleap-customization-default \
-    tuleap-documentation \
-    restler-api-explorer; \
+    cronie; \
     yum clean all
 
 # Gitolite will not work out-of-the-box with an error like 
@@ -34,12 +25,27 @@ RUN yum install -y mysql-server \
 # creating the user.
 # I still not understand why it's needed (just work without comment or tricks
 # on a fresh centos install)
-RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/sshd
 
+# Second sed is for cron
 # Cron: http://stackoverflow.com/a/21928878/1528413
-RUN sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond
 
-RUN /sbin/service sshd start && yum install -y --enablerepo=rpmforge-extras tuleap-plugin-git; yum clean all
+RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/sshd && \
+    sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond
+
+# Need to depend on tuleap-core-cvs
+RUN /sbin/service sshd start && yum install -y --enablerepo=rpmforge-extras \
+    tuleap-install \
+    tuleap-core-cvs \
+    tuleap-core-subversion \
+    tuleap-plugin-agiledashboard \
+    tuleap-plugin-hudson \
+    tuleap-plugin-git \
+    tuleap-plugin-graphontrackers \
+    tuleap-theme-flamingparrot \
+    tuleap-documentation \
+    tuleap-customization-default \
+    restler-api-explorer; \
+    yum clean all
 
 RUN pip install pip --upgrade ; pip install supervisor
 
