@@ -4,17 +4,20 @@ FROM centos:centos6
 MAINTAINER Manuel Vacelet, manuel.vacelet@enalean.com
 
 RUN rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
-RUN rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm http://mir01.syntis.net/epel/6/i386/epel-release-6-8.noarch.rpm
+RUN rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 
-COPY rpmforge.repo Tuleap.repo /etc/yum.repos.d/
+COPY rpmforge.repo /etc/yum.repos.d/
+COPY Tuleap.repo /etc/yum.repos.d/
 
+# python-pip is from epel, so it has to be installed after epel-release
 RUN yum install -y mysql-server \
+    epel-release \
     postfix \
     openssh-server \
-    python-pip \
     sudo \
     rsyslog \
     cronie; \
+    yum install -y python-pip; \
     yum clean all
 
 # Gitolite will not work out-of-the-box with an error like 
