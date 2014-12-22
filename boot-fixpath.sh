@@ -24,6 +24,17 @@ set -e
 [ -d /var/lib/tuleap ]   && rm -rf /var/lib/tuleap
 [ -d /var/lib/gitolite ] && rm -rf /var/lib/gitolite
 
+if [ -f /data/etc/ssh/ssh_host_key ]; then
+    rm -f /etc/ssh/ssh_host_*
+
+    ln -s /data/etc/ssh/ssh_host_dsa_key     /etc/ssh/ssh_host_dsa_key
+    ln -s /data/etc/ssh/ssh_host_dsa_key.pub /etc/ssh/ssh_host_dsa_key.pub
+    ln -s /data/etc/ssh/ssh_host_key         /etc/ssh/ssh_host_key
+    ln -s /data/etc/ssh/ssh_host_key.pub     /etc/ssh/ssh_host_key.pub
+    ln -s /data/etc/ssh/ssh_host_rsa_key     /etc/ssh/ssh_host_rsa_key
+    ln -s /data/etc/ssh/ssh_host_rsa_key.pub /etc/ssh/ssh_host_rsa_key.pub
+fi
+
 # Update paths to refer to persistent storage
 cd /etc
 ln -s /data/etc/tuleap tuleap

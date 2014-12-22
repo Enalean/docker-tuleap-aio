@@ -3,8 +3,8 @@ FROM centos:centos6
 
 MAINTAINER Manuel Vacelet, manuel.vacelet@enalean.com
 
-RUN rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
-RUN rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+RUN rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt && \
+    rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 
 COPY rpmforge.repo /etc/yum.repos.d/
 COPY Tuleap.repo /etc/yum.repos.d/
@@ -32,11 +32,14 @@ RUN yum install -y mysql-server \
 # Second sed is for cron
 # Cron: http://stackoverflow.com/a/21928878/1528413
 
-RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/sshd && \
-    sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond
+# Third sed if for epel dependencies, by default php-pecl-apcu provides 
+# php-pecl-apc but we really want apc not apcu
 
-# Need to depend on tuleap-core-cvs
-RUN /sbin/service sshd start && yum install -y --enablerepo=rpmforge-extras \
+RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/sshd && \
+    sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond && \
+    sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
+    /sbin/service sshd start && \
+    yum install -y --enablerepo=rpmforge-extras \
     tuleap-install \
     tuleap-core-cvs \
     tuleap-core-subversion \
@@ -48,9 +51,8 @@ RUN /sbin/service sshd start && yum install -y --enablerepo=rpmforge-extras \
     tuleap-documentation \
     tuleap-customization-default \
     restler-api-explorer; \
-    yum clean all
-
-RUN pip install pip --upgrade ; pip install supervisor
+    yum clean all && \
+    pip install pip --upgrade ; pip install supervisor
 
 COPY supervisord.conf /etc/supervisord.conf
 

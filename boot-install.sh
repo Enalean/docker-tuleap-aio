@@ -7,6 +7,7 @@ function generate_passwd {
 }
 
 mkdir -p /data/etc/httpd/
+mkdir -p /data/etc/ssh/
 mkdir -p /data/home
 mkdir -p /data/lib
 mkdir -p /data/etc/logrotate.d
@@ -65,6 +66,7 @@ mv /etc/passwd                /data/etc
 mv /etc/shadow                /data/etc
 mv /etc/group                 /data/etc
 mv /root/.tuleap_passwd       /data/root
+mv /etc/ssh/ssh_host_*        /data/etc/ssh
 
 # Data
 mv /home/codendiadm /data/home
