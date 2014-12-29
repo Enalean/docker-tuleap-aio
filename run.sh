@@ -2,6 +2,11 @@
 
 set -x
 
+while ! mysql -h$DB_PORT_3306_TCP_ADDR -uroot -p$MYSQL_ROOT_PASSWORD -e "show databases" >/dev/null; do 
+    echo "Wait for the db";
+    sleep 1
+done
+
 TULEAP_INSTALL_TIME="false"
 if [ ! -f /data/etc/tuleap/conf/local.inc ]; then
     TULEAP_INSTALL_TIME="true"
@@ -13,6 +18,10 @@ fi
 
 # Fix path
 ./boot-fixpath.sh
+
+# Update DB location
+sed -i "s/^host.*/host $DB_PORT_3306_TCP_ADDR/" /etc/libnss-mysql.cfg
+sed -i "s/^\$sys_dbhost.*/\$sys_dbhost=\"$DB_PORT_3306_TCP_ADDR\";/" /etc/tuleap/conf/database.inc
 
 # Allow configuration update at boot time
 ./boot-update-config.sh

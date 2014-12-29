@@ -919,6 +919,7 @@ do
 		mysql_host="$2";shift 2
 		MYSQL="$MYSQL -h$mysql_host"
 		MYSQLSHOW="$MYSQLSHOW -h$mysql_host"
+		mysql_remote_server=true
 		;;
 	--mysql-port)
 		mysql_port="$2";shift 2

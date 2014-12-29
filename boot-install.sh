@@ -28,7 +28,7 @@ done
 popd > /dev/null
 
 # Install Tuleap
-bash ./setup.sh --disable-selinux --sys-default-domain=$VIRTUAL_HOST --sys-org-name=Tuleap --sys-long-org-name=Tuleap
+bash ./setup.sh --disable-selinux --sys-default-domain=$VIRTUAL_HOST --sys-org-name=Tuleap --sys-long-org-name=Tuleap --mysql-host=$DB_PORT_3306_TCP_ADDR --mysql-root-password=$MYSQL_ROOT_PASSWORD --mysql-httpd-host='%'
 
 # Setting root password
 root_passwd=$(generate_passwd)
