@@ -50,7 +50,7 @@ RUN /sbin/service sshd start && yum install -y --enablerepo=rpmforge-extras \
     restler-api-explorer; \
     yum clean all
 
-RUN pip install pip --upgrade ; pip install supervisor
+RUN pip install supervisor
 
 COPY supervisord.conf /etc/supervisord.conf
 
