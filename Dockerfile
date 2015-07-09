@@ -3,10 +3,6 @@ FROM centos:centos6
 
 MAINTAINER Manuel Vacelet, manuel.vacelet@enalean.com
 
-RUN rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt && \
-    rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-
-COPY rpmforge.repo /etc/yum.repos.d/
 COPY Tuleap.repo /etc/yum.repos.d/
 
 # python-pip is from epel, so it has to be installed after epel-release
@@ -14,7 +10,6 @@ RUN yum install -y mysql-server \
     epel-release \
     postfix \
     openssh-server \
-    sudo \
     rsyslog \
     cronie; \
     yum install -y python-pip; \
@@ -39,13 +34,13 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond && \
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
     /sbin/service sshd start && \
-    yum install -y --enablerepo=rpmforge-extras \
+    yum install -y \
     tuleap-install-8.3 \
     tuleap-core-cvs \
     tuleap-core-subversion \
     tuleap-plugin-agiledashboard \
     tuleap-plugin-hudson \
-    tuleap-plugin-git \
+    tuleap-plugin-git-gitolite3 \
     tuleap-plugin-graphontrackers \
     tuleap-theme-flamingparrot \
     tuleap-documentation \
