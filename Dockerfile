@@ -45,7 +45,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     tuleap-theme-flamingparrot \
     tuleap-documentation \
     tuleap-customization-default \
-    restler-api-explorer; \
+    restler-api-explorer && \
     yum clean all && \
     pip install supervisor
 

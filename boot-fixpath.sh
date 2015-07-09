@@ -39,7 +39,6 @@ fi
 cd /etc
 ln -s /data/etc/tuleap tuleap
 ln -s /data/etc/aliases aliases
-ln -s /data/etc/aliases.codendi aliases.codendi
 ln -s /data/etc/libnss-mysql-root.cfg libnss-mysql-root.cfg
 ln -s /data/etc/libnss-mysql.cfg libnss-mysql.cfg
 ln -s /data/etc/my.cnf my.cnf

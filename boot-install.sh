@@ -38,9 +38,6 @@ echo "root: $root_passwd" >> /root/.tuleap_passwd
 # Place for post install stuff
 ./boot-postinstall.sh
 
-# Create fake file to avoid error below when moving
-touch /etc/aliases.codendi
-
 # Ensure system will be synchronized ASAP
 /usr/share/tuleap/src/utils/php-launcher.sh /usr/share/tuleap/src/utils/launch_system_check.php
 
@@ -55,7 +52,6 @@ mv /etc/httpd/conf            /data/etc/httpd
 mv /etc/httpd/conf.d          /data/etc/httpd
 mv /etc/tuleap                /data/etc
 mv /etc/aliases               /data/etc
-mv /etc/aliases.codendi       /data/etc
 mv /etc/logrotate.d/httpd     /data/etc/logrotate.d
 mv /etc/libnss-mysql.cfg      /data/etc
 mv /etc/libnss-mysql-root.cfg /data/etc
