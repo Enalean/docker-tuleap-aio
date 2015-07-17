@@ -35,7 +35,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
     /sbin/service sshd start && \
     yum install -y \
-    tuleap-install-8.3 \
+    tuleap-install-8.4 \
     tuleap-core-cvs \
     tuleap-core-subversion \
     tuleap-plugin-agiledashboard \
