@@ -15,7 +15,7 @@ RUN yum install -y mysql-server \
     yum install -y python-pip; \
     yum clean all
 
-# Gitolite will not work out-of-the-box with an error like 
+# Gitolite will not work out-of-the-box with an error like
 # "User gitolite not allowed because account is locked"
 # Given http://stackoverflow.com/a/15761971/1528413 you might want to trick
 # /etc/shadown but the following pam modification seems to do the trick too
@@ -27,7 +27,7 @@ RUN yum install -y mysql-server \
 # Second sed is for cron
 # Cron: http://stackoverflow.com/a/21928878/1528413
 
-# Third sed if for epel dependencies, by default php-pecl-apcu provides 
+# Third sed if for epel dependencies, by default php-pecl-apcu provides
 # php-pecl-apc but we really want apc not apcu
 
 RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/sshd && \
@@ -45,7 +45,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     tuleap-theme-flamingparrot \
     tuleap-documentation \
     tuleap-customization-default \
-    restler-api-explorer && \
+    tuleap-api-explorer && \
     yum clean all && \
     pip install supervisor
 
