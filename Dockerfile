@@ -11,9 +11,10 @@ RUN yum install -y mysql-server \
     postfix \
     openssh-server \
     rsyslog \
-    cronie; \
-    yum install -y python-pip; \
-    yum clean all
+    cronie && \
+    yum install -y python-pip && \
+    yum clean all && \
+    curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python
 
 # Gitolite will not work out-of-the-box with an error like 
 # "User gitolite not allowed because account is locked"
@@ -35,7 +36,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
     /sbin/service sshd start && \
     yum install -y \
-    tuleap-install-8.4 \
+    tuleap-install-8.5 \
     tuleap-core-cvs \
     tuleap-core-subversion \
     tuleap-plugin-agiledashboard \
