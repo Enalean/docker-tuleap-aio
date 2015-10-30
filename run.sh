@@ -25,6 +25,7 @@ perl -pi -e "s%^;date.timezone =%date.timezone = Europe/Paris%" /etc/php.ini
 perl -pi -e "s%^#myhostname = host.domain.tld%myhostname = $VIRTUAL_HOST%" /etc/postfix/main.cf
 perl -pi -e "s%^alias_maps = hash:/etc/aliases%alias_maps = hash:/etc/aliases,hash:/etc/aliases.codendi%" /etc/postfix/main.cf
 perl -pi -e "s%^alias_database = hash:/etc/aliases%alias_database = hash:/etc/aliases,hash:/etc/aliases.codendi%" /etc/postfix/main.cf
+perl -pi -e "s%^#recipient_delimiter = %recipient_delimiter = %" /etc/postfix/main.cf
 
 # Update nscd config
 perl -pi -e "s%enable-cache[\t ]+group[\t ]+yes%enable-cache group no%" /etc/nscd.conf
