@@ -8,11 +8,17 @@ More info about Tuleap on [tuleap.org](http://www.tuleap.org)
 How to use it?
 ---------------
 
-Just install docker on your system as explained on the [docker](http://docker.io) website. Then run:
+First run:
 
-    $> docker run -ti -e VIRTUAL_HOST=localhost -p 80:80 -p 443:443 -p 22:22 -v /srv/docker/pink:/data enalean/tuleap-aio
+    $> docker volume create -n tuleap-data
+    $> docker run -ti -e VIRTUAL_HOST=localhost -p 80:80 -p 443:443 -p 22:22 -v tuleap-data:/data enalean/tuleap-aio
 
 Will run the container, just open http://localhost and enjoy !
+
+On other, regular runs:
+
+    $> docker run -d -p 80:80 -p 443:443 -p 22:22 -v tuleap-data:/data enalean/tuleap-aio
+
 
 Known issues
 ------------

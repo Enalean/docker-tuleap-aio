@@ -27,8 +27,12 @@ cd /usr/share/tuleap
 done
 popd > /dev/null
 
+# Do not activate services
+sed -ie 's/\$CHKCONFIG \$service on/: #\$CHKCONFIG \$service on/g' /usr/share/tuleap/tools/setup.sh
+sed -ie 's/are stored.*/are stored in \/data\/root\/\.tuleap_passwd"/g' /usr/share/tuleap/tools/setup.sh
+
 # Install Tuleap
-bash ./setup.sh --disable-selinux --sys-default-domain=$VIRTUAL_HOST --sys-org-name=Tuleap --sys-long-org-name=Tuleap
+/usr/share/tuleap/tools/setup.sh --disable-selinux --sys-default-domain=$VIRTUAL_HOST --sys-org-name=Tuleap --sys-long-org-name=Tuleap
 
 # Setting root password
 root_passwd=$(generate_passwd)
