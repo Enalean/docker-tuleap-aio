@@ -12,9 +12,8 @@ RUN yum install -y mysql-server \
     openssh-server \
     rsyslog \
     cronie && \
-    yum install -y python-pip && \
-    yum clean all && \
-    curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python
+    yum install -y supervisor && \
+    yum clean all
 
 # Gitolite will not work out-of-the-box with an error like
 # "User gitolite not allowed because account is locked"
@@ -47,8 +46,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     tuleap-documentation \
     tuleap-customization-default \
     tuleap-api-explorer && \
-    yum clean all && \
-    pip install supervisor
+    yum clean all
 
 COPY supervisord.conf /etc/supervisord.conf
 
