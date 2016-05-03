@@ -14,7 +14,7 @@ RUN yum install -y mysql-server \
     cronie && \
     yum install -y python-pip && \
     yum clean all && \
-    curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python
+    curl https://bootstrap.pypa.io/ez_setup.py | python
 
 # Gitolite will not work out-of-the-box with an error like
 # "User gitolite not allowed because account is locked"
