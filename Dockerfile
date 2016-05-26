@@ -34,6 +34,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond && \
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
     /sbin/service sshd start && \
+    rpm --rebuilddb && \
     yum install -y \
     tuleap-install-8.15 \
     tuleap-core-cvs \
