@@ -44,6 +44,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     tuleap-plugin-git-gitolite3 \
     tuleap-plugin-graphontrackers \
     tuleap-theme-flamingparrot \
+    tuleap-theme-burningparrot \
     tuleap-documentation \
     tuleap-customization-default \
     tuleap-api-explorer && \
