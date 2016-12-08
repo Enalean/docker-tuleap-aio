@@ -36,7 +36,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     /sbin/service sshd start && \
     rpm --rebuilddb && \
     yum install -y \
-    tuleap-install-9.1 \
+    tuleap-install-9.2 \
     tuleap-core-cvs \
     tuleap-core-subversion \
     tuleap-plugin-agiledashboard \
