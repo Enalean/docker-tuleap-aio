@@ -48,7 +48,8 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     tuleap-documentation \
     tuleap-customization-default \
     tuleap-api-explorer && \
-    yum clean all
+    yum clean all && \
+    sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 
 COPY supervisord.conf /etc/supervisord.conf
 
