@@ -39,6 +39,9 @@ root_passwd=$(generate_passwd)
 echo "root:$root_passwd" |chpasswd
 echo "root: $root_passwd" >> /root/.tuleap_passwd
 
+# Force the generation of the SSH host keys
+service sshd start && service sshd stop
+
 # Place for post install stuff
 ./boot-postinstall.sh
 
