@@ -42,6 +42,19 @@ echo "root: $root_passwd" >> /root/.tuleap_passwd
 # Force the generation of the SSH host keys
 service sshd start && service sshd stop
 
+# Generate self signed certificate for Apache
+cat << EOF | openssl req -new -nodes -keyout /etc/pki/tls/private/localhost.key \
+         -x509 -sha256 -days 365 -set_serial $RANDOM -extensions v3_req \
+         -out /etc/ssl/certs/localhost.crt 2>/dev/null
+--
+SomeState
+SomeCity
+SomeOrganization
+SomeOrganizationalUnit
+${VIRTUAL_HOST}
+root@${VIRTUAL_HOST}
+EOF
+
 # Place for post install stuff
 ./boot-postinstall.sh
 
