@@ -11,6 +11,7 @@ RUN yum install -y mysql-server \
     postfix \
     openssh-server \
     rsyslog \
+    passwd \
     cronie && \
     yum install -y supervisor && \
     yum clean all
