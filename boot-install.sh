@@ -55,6 +55,13 @@ ${VIRTUAL_HOST}
 root@${VIRTUAL_HOST}
 EOF
 
+# (Re)Generate the Gitolite admin key for the codendiadm user
+ssh-keygen -q -t rsa -N "" -C 'Tuleap / gitolite admin key' -f '/home/codendiadm/.ssh/id_rsa_gl-adm'
+chown codendiadm:codendiadm /home/codendiadm/.ssh/id_rsa_gl-adm*
+echo "command=\"/usr/share/gitolite3/gitolite-shell id_rsa_gl-adm\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty $(cat /home/codendiadm/.ssh/id_rsa_gl-adm.pub)" > /var/lib/gitolite/.ssh/authorized_keys
+chown gitolite:gitolite /var/lib/gitolite/.ssh/authorized_keys
+chmod 600 /var/lib/gitolite/.ssh/authorized_keys
+
 # Place for post install stuff
 ./boot-postinstall.sh
 
