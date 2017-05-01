@@ -48,6 +48,12 @@ ln -s /data/etc/passwd passwd
 ln -s /data/etc/shadow shadow
 ln -s /data/etc/group group
 
+cd /etc/pki/tls/private
+ln -s /data/etc/pki/tls/private/localhost.key localhost.key
+
+cd /etc/ssl/certs
+ln -s /data/etc/ssl/certs/localhost.crt localhost.crt
+
 cd /etc/logrotate.d
 ln -s /data/etc/logrotate.d/httpd httpd
 

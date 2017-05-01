@@ -11,6 +11,8 @@ mkdir -p /data/etc/ssh/
 mkdir -p /data/home
 mkdir -p /data/lib
 mkdir -p /data/etc/logrotate.d
+mkdir -p /data/etc/ssl/certs/
+mkdir -p /data/etc/pki/tls/private/
 mkdir -p /data/root && chmod 700 /data/root
 
 pushd . > /dev/null
@@ -77,6 +79,8 @@ service crond stop
 # Conf
 mv /etc/httpd/conf            /data/etc/httpd
 mv /etc/httpd/conf.d          /data/etc/httpd
+mv /etc/pki/tls/private/localhost.key /data/etc/pki/tls/private
+mv /etc/ssl/certs/localhost.crt /data/etc/ssl/certs
 mv /etc/tuleap                /data/etc
 mv /etc/aliases               /data/etc
 mv /etc/logrotate.d/httpd     /data/etc/logrotate.d
