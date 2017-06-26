@@ -51,6 +51,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     tuleap-api-explorer && \
     yum clean all && \
     sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf && \
     rm -f /etc/ssh/ssh_host_* && \
     rm -f /etc/ssl/certs/localhost.crt /etc/pki/tls/private/localhost.key && \
     rm -f /home/codendiadm/.ssh/id_rsa_gl-adm* /var/lib/gitolite/.ssh/authorized_keys
