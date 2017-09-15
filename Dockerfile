@@ -8,6 +8,7 @@ COPY Tuleap.repo /etc/yum.repos.d/
 # python-pip is from epel, so it has to be installed after epel-release
 RUN yum install -y mysql-server \
     epel-release \
+    centos-release-scl \
     postfix \
     openssh-server \
     rsyslog \
@@ -37,7 +38,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     /sbin/service sshd start && \
     rpm --rebuilddb && \
     yum install -y \
-    tuleap-install-9.11 \
+    tuleap-install-9.12 \
     tuleap-core-cvs \
     tuleap-core-subversion \
     tuleap-plugin-agiledashboard \
