@@ -33,17 +33,6 @@ popd > /dev/null
 sed -ie 's/\$CHKCONFIG \$service on/: #\$CHKCONFIG \$service on/g' /usr/share/tuleap/tools/setup.sh
 sed -ie 's/are stored.*/are stored in \/data\/root\/\.tuleap_passwd"/g' /usr/share/tuleap/tools/setup.sh
 
-# Install Tuleap
-/usr/share/tuleap/tools/setup.sh --disable-domain-name-check --sys-default-domain=$VIRTUAL_HOST --sys-org-name=Tuleap --sys-long-org-name=Tuleap
-
-# Setting root password
-root_passwd=$(generate_passwd)
-echo "root:$root_passwd" |chpasswd
-echo "root: $root_passwd" >> /root/.tuleap_passwd
-
-# Force the generation of the SSH host keys
-service sshd start && service sshd stop
-
 # Generate self signed certificate for Apache
 cat << EOF | openssl req -new -nodes -keyout /etc/pki/tls/private/localhost.key \
          -x509 -sha256 -days 365 -set_serial $RANDOM -extensions v3_req \
@@ -56,6 +45,17 @@ SomeOrganizationalUnit
 ${VIRTUAL_HOST}
 root@${VIRTUAL_HOST}
 EOF
+
+# Install Tuleap
+/usr/share/tuleap/tools/setup.sh --disable-domain-name-check --sys-default-domain=$VIRTUAL_HOST --sys-org-name=Tuleap --sys-long-org-name=Tuleap
+
+# Setting root password
+root_passwd=$(generate_passwd)
+echo "root:$root_passwd" |chpasswd
+echo "root: $root_passwd" >> /root/.tuleap_passwd
+
+# Force the generation of the SSH host keys
+service sshd start && service sshd stop
 
 # (Re)Generate the Gitolite admin key for the codendiadm user
 ssh-keygen -q -t rsa -N "" -C 'Tuleap / gitolite admin key' -f '/home/codendiadm/.ssh/id_rsa_gl-adm'
