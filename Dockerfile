@@ -40,7 +40,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     yum install -y \
     tuleap-install-9.14 \
     tuleap-core-cvs \
-    tuleap-core-subversion \
+    tuleap-plugin-svn \
     tuleap-plugin-agiledashboard \
     tuleap-plugin-hudson \
     tuleap-plugin-hudson-git \
