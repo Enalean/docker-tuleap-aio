@@ -21,7 +21,7 @@ You can get the site administrator credentials to log in the first time with:
 
 On other, regular runs:
 
-    $> docker run -d -p 80:80 -p 443:443 -p 22:22 -v tuleap-data:/data enalean/tuleap-aio
+    $> docker run -ti -e VIRTUAL_HOST=localhost -p 80:80 -p 443:443 -p 22:22 -v tuleap-data:/data enalean/tuleap-aio
 
 
 Known issues
