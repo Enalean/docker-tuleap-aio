@@ -36,7 +36,7 @@ Set a mysql root password in environment:
 
 Then run:
 
-     $> docker-composer up
+     $> docker-compose up
 
 It will create everything needed then will wait after a ``Starting Tuleap: [OK]``
 
