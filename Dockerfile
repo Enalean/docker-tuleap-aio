@@ -36,16 +36,9 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     /sbin/service sshd start && \
     rpm --rebuilddb && \
     yum install -y \
-    tuleap-install-9.14 \
-    tuleap-plugin-svn \
-    tuleap-plugin-agiledashboard \
-    tuleap-plugin-hudson \
-    tuleap-plugin-hudson-git \
-    tuleap-plugin-hudson-svn \
-    tuleap-plugin-git-gitolite3 \
-    tuleap-plugin-pullrequest \
-    tuleap-plugin-mediawiki \
-    tuleap-plugin-graphontrackers \
+    --exclude="tuleap-plugin-referencealias*, tuleap-plugin-im, tuleap-plugin-fulltextsearch, tuleap-plugin-fusionforge_compat, tuleap-plugin-git, tuleap-plugin-proftpd, tuleap-plugin-tracker-encryption, tuleap-plugin-webdav" \
+    tuleap-install \
+    tuleap-plugin-* \
     tuleap-theme-flamingparrot \
     tuleap-theme-burningparrot \
     tuleap-documentation \
