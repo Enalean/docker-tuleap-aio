@@ -36,7 +36,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     /sbin/service sshd start && \
     rpm --rebuilddb && \
     yum install -y \
-    --exclude="tuleap-plugin-referencealias*, tuleap-plugin-im, tuleap-plugin-fulltextsearch, tuleap-plugin-fusionforge_compat, tuleap-plugin-git, tuleap-plugin-proftpd, tuleap-plugin-tracker-encryption, tuleap-plugin-webdav" \
+    --exclude="tuleap-plugin-referencealias*, tuleap-plugin-im, tuleap-plugin-forumml, tuleap-plugin-fulltextsearch, tuleap-plugin-fusionforge_compat, tuleap-plugin-git, tuleap-plugin-proftpd, tuleap-plugin-tracker-encryption, tuleap-plugin-webdav, tuleap-core-mailman, tuleap-core-cvs" \
     tuleap-install \
     tuleap-plugin-* \
     tuleap-theme-flamingparrot \
