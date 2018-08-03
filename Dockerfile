@@ -2,6 +2,7 @@
 FROM centos:6
 
 COPY Tuleap.repo /etc/yum.repos.d/
+COPY centos-vault-rh-php56.repo /etc/yum.repos.d/
 
 # python-pip is from epel, so it has to be installed after epel-release
 RUN yum install -y mysql-server \
