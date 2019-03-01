@@ -1,5 +1,5 @@
 ## Tuleap All In One ##
-FROM centos:6
+FROM centos:7
 
 COPY Tuleap.repo /etc/yum.repos.d/
 COPY remi-safe.repo /etc/yum.repos.d/
