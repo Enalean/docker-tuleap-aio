@@ -13,20 +13,26 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     /usr/sbin/groupadd -g 904 -r ftpadmin && \
     /usr/sbin/groupmod -g 50  ftp && \
     /usr/sbin/useradd -u 900 -c 'Tuleap user' -m -d '/var/lib/tuleap' -r -g "codendiadm" -s '/bin/bash' -G ftpadmin,gitolite codendiadm && \
-    /usr/sbin/useradd -u 902 -c 'Git' -m -d '/var/lib/gitolite' -g gitolite gitolite && \
+    /usr/sbin/useradd -u 902 -c 'Git' -m -d '/var/lib/gitolite' -r -g gitolite gitolite && \
     /usr/sbin/useradd -u 903 -c 'Dummy Tuleap User' -M -d '/var/lib/tuleap/dumps' -r -g dummy dummy && \
     /usr/sbin/useradd -u 904 -c 'FTP Administrator' -M -d '/var/lib/tuleap/ftp' -r -g ftpadmin ftpadmin && \
     /usr/sbin/usermod -u 14 -c 'FTP User' -d '/var/lib/tuleap/ftp' -g ftp ftp && \
     yum install -y epel-release centos-release-scl sudo https://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
     yum install -y \
+    cronie \
+    openssh-server \
+    postfix \
     supervisor \
     rh-mysql57-mysql-server \
     tuleap-plugin-tracker \
     tuleap-theme-burningparrot \
-    tuleap-theme-flamingparrot
-
-RUN sed -i -e 's/\[embedded\]//' /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf && \
-    echo 'sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"' >> /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf
+    tuleap-theme-flamingparrot && \
+    /usr/sbin/sshd-keygen && \
+    sed -i -e 's/\[embedded\]//' /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf && \
+    echo 'sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"' >> /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf && \
+    sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf && \
+    rm -f /home/codendiadm/.ssh/id_rsa_gl-adm* /var/lib/gitolite/.ssh/authorized_keys
 
 COPY ./supervisor.d/*.ini /etc/supervisord.d/
 
