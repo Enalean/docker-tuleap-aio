@@ -7,6 +7,8 @@ ENV MYSQL_ROOT_PASSWORD=welcome0
 
 COPY Tuleap.repo /etc/yum.repos.d/
 
+# initscripts is implicit dependency of openssh-server for ssh-keygen (/etc/rc.d/init.d/functions)
+
 RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     /usr/sbin/groupadd -g 902 -r gitolite && \
     /usr/sbin/groupadd -g 903 -r dummy && \
@@ -20,6 +22,7 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     yum install -y epel-release centos-release-scl sudo https://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
     yum install -y \
     cronie \
+    initscripts \
     openssh-server \
     postfix \
     supervisor \
@@ -27,7 +30,6 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     tuleap-plugin-tracker \
     tuleap-theme-burningparrot \
     tuleap-theme-flamingparrot && \
-    /usr/sbin/sshd-keygen && \
     sed -i -e 's/\[embedded\]//' /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf && \
     echo 'sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"' >> /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf && \
     sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config && \
