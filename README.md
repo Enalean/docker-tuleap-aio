@@ -7,6 +7,8 @@ More info about Tuleap on [tuleap.org](https://www.tuleap.org)
 # Todo
 
 * cron for systemevents
+  * Current status: depend on partial rewrite of cron management on Tuleap
+  * Out of the box it won't process any kind of system events
 * git (ssh & stuff)
 * svn
 * other plugins
