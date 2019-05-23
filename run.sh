@@ -9,7 +9,6 @@ set -o pipefail
 if [ ! -d /var/opt/rh/rh-mysql57/lib/mysql/mysql ]; then
     /usr/local/bin/mysql-init.sh
 
-    export TLP_SYSTEMCTL=ignore
     /usr/share/tuleap/tools/setup.el7.sh -y --server-name=tuleap.local --mysql-server=localhost --mysql-password=${MYSQL_ROOT_PASSWORD}
 
     scl enable rh-mysql57 -- mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown

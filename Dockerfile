@@ -25,6 +25,7 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     initscripts \
     openssh-server \
     postfix \
+    rsyslog \
     supervisor \
     rh-mysql57-mysql-server \
     tuleap-plugin-tracker \
@@ -36,11 +37,18 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf && \
     rm -f /home/codendiadm/.ssh/id_rsa_gl-adm* /var/lib/gitolite/.ssh/authorized_keys
 
+# https://www.projectatomic.io/blog/2014/09/running-syslog-within-a-docker-container/
+# https://github.com/rsyslog/rsyslog-docker/blob/master/base/centos7/Dockerfile
+RUN rm -f /etc/rsyslog.d/listen.conf
+COPY rsyslog.conf /etc/rsyslog.conf
+
 COPY ./supervisor.d/*.ini /etc/supervisord.d/
 
 COPY *.sh /usr/local/bin/
 
 CMD [ "/usr/local/bin/run.sh" ]
+
+ENV TLP_SYSTEMCTL=docker-centos7
 
 # # python-pip is from epel, so it has to be installed after epel-release
 # RUN yum install -y mysql-server \
