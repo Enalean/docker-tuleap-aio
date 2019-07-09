@@ -4,6 +4,7 @@ FROM centos:7
 EXPOSE 22 80 443
 
 ENV MYSQL_ROOT_PASSWORD=welcome0
+ENV TLP_SYSTEMCTL=docker-centos7
 
 COPY Tuleap.repo /etc/yum.repos.d/
 
@@ -29,6 +30,8 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     supervisor \
     rh-mysql57-mysql-server \
     tuleap-plugin-tracker \
+    tuleap-plugin-git \
+    tuleap-plugin-svn \
     tuleap-theme-burningparrot \
     tuleap-theme-flamingparrot && \
     sed -i -e 's/\[embedded\]//' /etc/opt/rh/rh-mysql57/my.cnf.d/rh-mysql57-mysql-server.cnf && \
@@ -47,8 +50,6 @@ COPY ./supervisor.d/*.ini /etc/supervisord.d/
 COPY *.sh /usr/local/bin/
 
 CMD [ "/usr/local/bin/run.sh" ]
-
-ENV TLP_SYSTEMCTL=docker-centos7
 
 # # python-pip is from epel, so it has to be installed after epel-release
 # RUN yum install -y mysql-server \

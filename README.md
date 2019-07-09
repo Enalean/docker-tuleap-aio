@@ -6,18 +6,14 @@ More info about Tuleap on [tuleap.org](https://www.tuleap.org)
 
 # Todo
 
-* cron for systemevents
-  * Current status: depend on partial rewrite of cron management on Tuleap
-  * Out of the box it won't process any kind of system events
-* git (ssh & stuff)
-* svn
+* svn (missing apache)
 * other plugins
 * data volume
 
 # How to use it
 
     # Build & Run
-    docker build -t tuleap-aio-c7
+    docker build -t tuleap-aio-c7 .
     docker run --name tuleap-aio -ti --rm tuleap-aio-c7
     
     # Get IP and set for 'tuleap.local' in /etc/hosts
