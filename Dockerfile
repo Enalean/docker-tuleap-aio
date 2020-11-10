@@ -34,6 +34,7 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     tuleap-plugin-svn \
     tuleap-theme-burningparrot \
     tuleap-theme-flamingparrot && \
+    localedef -i fr_FR -c -f UTF-8 fr_FR.UTF-8 && \
     sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config # Need to keep this one so image scanner are happy
 
 CMD [ "/usr/bin/tuleap-cfg", "docker:tuleap-aio-run" ]
