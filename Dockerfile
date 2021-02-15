@@ -30,6 +30,7 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     supervisor \
     rh-mysql57-mysql-server \
     tuleap-plugin-tracker \
+    tuleap-plugin-agiledashboard \
     tuleap-plugin-git \
     tuleap-plugin-svn \
     tuleap-theme-burningparrot \
