@@ -32,6 +32,13 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     tuleap-plugin-tracker \
     tuleap-plugin-agiledashboard \
     tuleap-plugin-git \
+    tuleap-plugin-pullrequest \
+    tuleap-plugin-gitlab \
+    tuleap-plugin-plugin-embed \
+    tuleap-plugin-hudson-git \
+    tuleap-plugin-frs \
+    tuleap-plugin-docman \
+    tuleap-plugin-api-explorer \
     tuleap-plugin-svn \
     tuleap-theme-burningparrot \
     tuleap-theme-flamingparrot && \
