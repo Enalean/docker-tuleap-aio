@@ -45,4 +45,8 @@ RUN /usr/sbin/groupadd -g 900 -r codendiadm && \
     localedef -i fr_FR -c -f UTF-8 fr_FR.UTF-8 && \
     sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config # Need to keep this one so image scanner are happy
 
+RUN echo 'INSERT INTO platform_banner(importance, message) VALUES ("critical", "This platform is based on docker image <a href=https://hub.docker.com/r/enalean/tuleap-aio>enalean/tuleap-aio</a> that is no longer maintained. Please report this issue to Tuleap admins and check <a href=https://hub.docker.com/r/tuleap/tuleap-community-edition>new docker image</a>");' >> /usr/share/tuleap/src/db/mysql/database_initvalues.sql
+
+COPY 202106161700_tuleap_aio_end_of_maintenance.php /usr/share/tuleap/src/db/mysql/updates/2021/202106161700_tuleap_aio_end_of_maintenance.php
+
 CMD [ "/usr/bin/tuleap-cfg", "docker:tuleap-aio-run" ]
